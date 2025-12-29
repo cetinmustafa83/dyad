@@ -1,0 +1,9 @@
+ignoredBuiltDependencies:
+  - '@biomejs/biome'
+  - better-sqlite3
+  - core-js
+  - dugite
+  - electron
+  - electron-winstaller
+  - esbuild
+  - sharp

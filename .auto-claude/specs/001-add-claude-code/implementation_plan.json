@@ -1,0 +1,92 @@
+{
+  "feature": "add claude code",
+  "description": "Add Claude Code as an all-in-one local AI provider with automatic path detection and full MCP capabilities support. Users configure API keys (Claude API or GLM API) in Claude Code itself, not in Dyad UI.",
+  "created_at": "2025-12-28T19:43:32.296Z",
+  "updated_at": "2025-12-29T07:15:00.000Z",
+  "status": "completed",
+  "phases": [
+    {
+      "name": "Schema Updates",
+      "status": "completed",
+      "tasks": [
+        "Added 'claudecode' to providers list in schemas.ts",
+        "Updated cloudProviders filter to exclude claudecode",
+        "Added claudecode to LOCAL_PROVIDERS in language_model_constants.ts"
+      ]
+    },
+    {
+      "name": "Path Detection & Utilities",
+      "status": "completed",
+      "tasks": [
+        "Created claude_code_utils.ts with path detection for Mac/Linux",
+        "Implemented isClaudeCodeInstalled() function",
+        "Implemented getClaudeCodeVersion() function",
+        "Implemented detectClaudeCodeCapabilities() with MCP server detection"
+      ]
+    },
+    {
+      "name": "IPC Handlers",
+      "status": "completed",
+      "tasks": [
+        "Created local_model_claudecode_handler.ts",
+        "Implemented fetchClaudeCodeModels() handler",
+        "Implemented getClaudeCodeInstallationInfo() handler",
+        "Implemented getClaudeCodeCapabilities() handler",
+        "Registered handlers in local_model_handlers.ts",
+        "Added IPC channels to preload.ts allowlist",
+        "Added methods to IpcClient"
+      ]
+    },
+    {
+      "name": "Provider Implementation",
+      "status": "completed",
+      "tasks": [
+        "Created claude_code_provider.ts using OpenAI-compatible API",
+        "Added claudecode case to get_model_client.ts switch statement",
+        "Configured provider to use local Claude Code server"
+      ]
+    },
+    {
+      "name": "UI Components",
+      "status": "completed",
+      "tasks": [
+        "Created useClaudeCodeModels hook with atoms",
+        "Created ClaudeCodeConfiguration component",
+        "Added special handling in ApiKeyConfiguration.tsx",
+        "Implemented installation status display",
+        "Implemented capabilities display (MCP servers, skills, plugins, agents)"
+      ]
+    },
+    {
+      "name": "Type Updates",
+      "status": "completed",
+      "tasks": [
+        "Updated LocalModel interface to include 'claudecode' provider"
+      ]
+    }
+  ],
+  "features": [
+    "All-in-one provider - no API key configuration in Dyad UI",
+    "Users configure API keys (Claude API or GLM API) in Claude Code itself",
+    "Automatic Claude Code CLI path detection (Mac/Linux)",
+    "Installation status checking with version display",
+    "MCP servers detection and display",
+    "Skills, plugins, agents, and sub-agents detection",
+    "OpenAI-compatible API integration",
+    "Settings UI with installation info and capabilities",
+    "Support for Claude Sonnet 4.5, Sonnet 4, Opus 4, and Haiku 4 models",
+    "Leverages Claude Code's context management",
+    "Access to all Claude Code agents and sub-agents",
+    "Full integration with Claude Code's skills and plugins"
+  ],
+  "notes": [
+    "ALL-IN-ONE PROVIDER: API keys are configured in Claude Code, not in Dyad",
+    "Supports both Claude API (Anthropic) and GLM API",
+    "Claude Code is only supported on macOS and Linux (not Windows)",
+    "Windows users can potentially use WSL but this is experimental",
+    "Claude Code runs a local server (default port 3000, configurable via CLAUDE_CODE_PORT)",
+    "MCP capabilities are read from Claude Code config files",
+    "Provider uses OpenAI-compatible API format",
+    "No authentication needed in Dyad - all handled by Claude Code"
+  ]
+}
